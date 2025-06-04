@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  population: MyString
+  multi_tenant: false
+  port_org: 1
+  collaboration: MyText
+  services: MyText
+
+two:
+  name: MyString
+  population: MyString
+  multi_tenant: false
+  port_org: 1
+  collaboration: MyText
+  services: MyText
