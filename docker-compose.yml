@@ -1,0 +1,53 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '55432:5432'
+
+  backend: 
+    build: 
+      context: ./backend
+    working_dir: /app
+    volumes: 
+      - ./backend:/app
+    environment: 
+      RAILS_ENV: development
+      DB_HOST: db
+      DB_USERNAME: postgresql
+      DB_PASSWORD: postgresql
+    depends_on:
+      - db
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - '5173:5173'
+    working_dir: /app
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/src:/app/src
+      - /app/node_modules
+
+  flask:
+    build: ./backend/flask
+    working_dir: /app
+    ports:
+      - '4001:4001'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - backend
+      - db
+
+volumes:
+  postgres_data:
