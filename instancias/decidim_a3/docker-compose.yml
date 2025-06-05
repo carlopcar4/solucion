@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+    decidim:
+        image: decidim/decidim:latest
+        env_file: .env
+        working_dir: /app
+        volumes:
+            - ./data:/app/public
+            - ./entrypoint.sh:/app/entrypoint.sh
+            - ./db/seeds.rb:/app/db/seeds.rb
+            - ./lib/tasks/crear_instancia.rake:/app/lib/tasks/crear_instancia.rake
+        entrypoint: ["/app/entrypoint.sh"]
+        container_name: decidim_a3
+        networks:
+            - external_net
+        ports:
+            - "${PORT}:3000"
+
+networks:
+    external_net:
+        external: true
+        name: solucion_default

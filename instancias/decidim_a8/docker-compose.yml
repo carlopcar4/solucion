@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+    decidim:
+        image: decidim/decidim:latest
+        env_file: .env
+        working_dir: /app
+        ports:
+            - "${PORT}:3000"
+        volumes:
+            - ./db/seeds.rb:/app/db/seeds.rb
+            - ./data:/app/public
+        container_name: decidim_a8
+        networks:
+            - external_net
+        
+networks:
+    external_net:
+        external: true
+        name: solucion_default
