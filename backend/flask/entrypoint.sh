@@ -6,6 +6,8 @@ until pg_isready -h "$DB_HOST" -U "$DB_USERNAME"; do
 done
 
 bundle exec rails db:create
+bundle exec rails decidim:install:migrations
 bundle exec rails db:migrate
+bundle exec rails crear:instancia
 
 exec "$@"

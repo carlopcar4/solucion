@@ -22,7 +22,7 @@ services:
       DB_HOST: db
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
-      DB_Name: backend_development
+      DB_NAME: backend_development
     depends_on:
       - db
     ports:
@@ -45,7 +45,9 @@ services:
     ports:
       - '4001:4001'
     volumes:
+      - ./instancias:/app/instancias
       - /var/run/docker.sock:/var/run/docker.sock
+
     depends_on:
       - backend
       - db
