@@ -1,14 +1,16 @@
 import os, shutil, subprocess
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins="http://localhost:5173")
 
 BASE_DIR = os.path.abspath(os.path.join(os.getcwd(), "instancias"))
 
-def slug(name):
+def slugy(name):
     return name.strip().lower().replace(" ", "_")
 
-@app.route("/crear-instancia", methods=["POST"])
+@app.route("/crear_instancia", methods=["POST"])
 def crear_instancia():
     datos = request.get_json()
     id = datos.get("id")
@@ -19,7 +21,7 @@ def crear_instancia():
     banner = datos.get("banner", "")
     nombre = datos.get("name")
     
-    slug = slug(nombre)
+    slug = slugy(nombre)
     nombre_mun = f"decidim_{slug}"
     ruta_mun = os.path.join(BASE_DIR, nombre_mun)
     

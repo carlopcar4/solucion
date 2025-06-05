@@ -61,28 +61,16 @@ function CreateCouncil() {
         try {
 
             const res = await fetch('http://localhost:4000/councils', {
-            method: 'POST',
-            body: formData
-        });
-            if (!res.ok) {
-                alert("Error al crear el municipio");
-            }
-            const data = await res.json();
-            const id = data.id;
-            const flaskRes = await fetch(`http://localhost:4001/api/crear_instancia`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: id})
-            });
-            
-            if (!flaskRes.ok) {
-                alert("Municipio creaddo pero error al desplegar la instancia");
-            } else {
-                alert("Municipio e instancia creados");
-            }
-            nav('/');
+                body: formData
+                });
+                if (!res.ok) {
+                alert("Error al crear el municipio");
+                return;
+                }
+                const data = await res.json();
+                alert("Municipio creado; la instancia se está desplegando");
+                nav('/');
         } catch(error) {
             alert("Error de conexión con el servidor");
         }
