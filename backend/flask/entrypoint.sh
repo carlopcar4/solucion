@@ -8,6 +8,6 @@ done
 bundle exec rails db:create
 bundle exec rails decidim:install:migrations
 bundle exec rails db:migrate
-bundle exec rails crear:instancia
+bundle exec rails db:seed
 
 exec "$@"

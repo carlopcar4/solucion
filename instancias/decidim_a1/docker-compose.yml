@@ -7,7 +7,7 @@ services:
         working_dir: /app
         volumes:
             - ./db/seeds.rb:/app/db/seeds.rb
-        container_name: decidim_a2
+        container_name: decidim_a1
         networks:
             - external_net
         ports:

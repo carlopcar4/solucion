@@ -6,8 +6,11 @@ services:
         env_file: .env
         working_dir: /app
         volumes:
+            - ./entrypoint.sh:/app/entrypoint.sh
             - ./db/seeds.rb:/app/db/seeds.rb
-        container_name: decidim_a2
+            - ./lib/tasks/crear_instancia.rake:/app/lib/tasks/crear_instancia.rake
+        entrypoint: ["/app/entrypoint.sh"]
+        container_name: decidim_a9
         networks:
             - external_net
         ports:

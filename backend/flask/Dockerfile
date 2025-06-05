@@ -43,5 +43,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 5) Copiar el resto de tu aplicación Flask
 COPY . /app
 
+
 EXPOSE 4001
 CMD ["python", "app.py"]
