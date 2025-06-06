@@ -39,18 +39,5 @@ services:
       - ./frontend/src:/app/src
       - /app/node_modules
 
-  flask:
-    build: ./backend/flask
-    working_dir: /app
-    ports:
-      - '4001:4001'
-    volumes:
-      - ./instancias:/app/instancias
-      - /var/run/docker.sock:/var/run/docker.sock
-
-    depends_on:
-      - backend
-      - db
-
 volumes:
   postgres_data:
