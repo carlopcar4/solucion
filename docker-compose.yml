@@ -28,6 +28,15 @@ services:
     ports:
       - "4000:4000"
 
+  flask:
+    build: ./flask
+    working_dir: /app
+    ports:
+      - "4001:4001"
+    depends_on:
+      - db
+      - backend
+
   frontend:
     build: ./frontend
     ports:
