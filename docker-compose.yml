@@ -33,6 +33,8 @@ services:
     working_dir: /app
     ports:
       - "4001:4001"
+    volumes: 
+      - ./flask:/app
     depends_on:
       - db
       - backend
