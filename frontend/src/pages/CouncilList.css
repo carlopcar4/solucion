@@ -1,0 +1,76 @@
+:root {
+    --primary: #0055a5;
+    --primary-dark: #003e7a;
+    --secondary: #f5f7fa;
+    --border: #d0d7de;
+    --danger: #c0392b;
+    --text: #262626;
+}
+
+.council-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+}
+
+.titulo {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: var(--primary-dark);
+    text-align: center;
+}
+
+.council-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.council-table thead {
+    background: var(--secondary);
+}
+
+.council-table th,
+.council-table td {
+    padding: 15px;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+
+
+
+.acciones2 button {
+    background: none;
+    border: 0;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--primary-dark);
+    transition: transform .1s ease;
+}
+
+.acciones2 button:hover {
+    transform: scale(1.1);
+}
+
+.acciones2 .danger {
+    color: var(--danger);
+}
+
+.boton {
+    display: flex;
+    justify-content: center; 
+    margin-top: 2rem; 
+}
+
+.bot{
+    background: #0055a5;
+}
+.bot:hover {
+    background: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+.im{
+    display: flex;
+}
