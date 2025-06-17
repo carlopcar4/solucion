@@ -33,7 +33,7 @@ class CouncilsController < ApplicationController
 	begin
 		logo_url = url_for(@council.logo)
 		banner_url = url_for(@council.banner)
-		uri = URI('http://flask:4001/crear_instancia')
+		uri = URI('http://localhost:4001/crear_instancia')
 		req = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
 		req.body = { id: @council.id, name: @council.name, puerto_org: @council.puerto_org, 
 			logo: logo_url, banner: banner_url, collaborations: @council.collaborations,

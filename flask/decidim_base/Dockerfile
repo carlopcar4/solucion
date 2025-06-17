@@ -1,7 +1,7 @@
 FROM ruby:3.2.2
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV NODE_MAJOR=18
+ENV NODE_MAJOR=20
 
 # Install system dependencies
 RUN apt-get update -qq && apt-get install -y \
@@ -10,7 +10,6 @@ RUN apt-get update -qq && apt-get install -y \
     imagemagick \
     libicu-dev \
     libpq-dev \
-    nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 # Install node
@@ -21,27 +20,22 @@ RUN apt-get update -qq && apt-get install -y \
     nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Create workdir
-RUN mkdir /app
+RUN npm install -g yarn
+
+
+# Create workdir - no need to copy code yet, as it will be mounted
 WORKDIR /app
 
-# Installs bundler dependencies
-ENV \
-    BUNDLE_BIN=/usr/local/bundle/bin \
-    BUNDLE_JOBS=10 \
-    BUNDLE_PATH=/usr/local/bundle \
-    BUNDLE_RETRY=3 \
-    GEM_HOME=/bundle
-ENV PATH="${BUNDLE_BIN}:${PATH}"
-
-# Copy Gemfile and install bundler dependencies
-ADD Gemfile Gemfile.lock /app/
-RUN gem install bundler:2.4.19
+COPY Gemfile Gemfile.lock /app/
+# NECESARIO PARA YARN MAEBY
+COPY package.json /app/
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+RUN gem install bundler:2.4.22
 RUN bundle install
+RUN bundle update
+RUN yarn install
 
-# Copy all the code to /app
-ADD . /app
 
-# Compile assets
-RUN npm i
-RUN npm i -g yarn
+ENTRYPOINT ["/app/entrypoint.sh"]
+# CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

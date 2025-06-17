@@ -1,11 +1,9 @@
-version: '3'
 services:
   app:
     build: . 
     env_file: ./.env
     volumes:
       - .:/app
-      - bundle:/usr/local/bundle
       - node_modules:/app/node_modules
     environment:
       - PORT=3000
@@ -17,7 +15,7 @@ services:
       - "${PORT}:3000"
     links:
       - pg
-    command: bash -c "bundle exec rails db:create && bundle exec rails db:migrate && bundle exec puma"
+    # command: bash -c "bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails bin/shakapacker && bundle exec puma -C config/puma.rb"
   pg:
     image: postgres:15
     volumes:

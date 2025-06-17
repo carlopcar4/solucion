@@ -28,17 +28,6 @@ services:
     ports:
       - "4000:4000"
 
-  flask:
-    build: ./flask
-    working_dir: /app
-    ports:
-      - "4001:4001"
-    volumes: 
-      - ./flask:/app
-      - /var/run/docker.sock:/var/run/docker.sock
-    depends_on:
-      - db
-      - backend
 
   frontend:
     build: ./frontend
