@@ -1,0 +1,30 @@
+services:
+  app:
+    build: . 
+    env_file: ./.env
+    volumes:
+      # - .:/app
+      - node_modules:/app/node_modules
+    environment:
+      - PORT=3000
+      - DATABASE_HOST=pg
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+      - RAILS_ENV=development
+    ports:
+      - "${PORT}:3000"
+    links:
+      - pg
+    # command: bash -c "bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails bin/shakapacker && bundle exec puma -C config/puma.rb"
+  pg:
+    image: postgres:15
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+
+volumes:
+  node_modules: {}
+  bundle: {}
+  pg-data: {}

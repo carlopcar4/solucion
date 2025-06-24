@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   db:
     image: postgres:16
@@ -28,6 +26,23 @@ services:
     ports:
       - "4000:4000"
 
+  flask:
+    build:
+      context: ./flask
+    working_dir: /app
+    volumes:
+      - ./flask:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment: 
+      RAILS_ENV: development
+      DB_HOST: db
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: flask_development
+    depends_on:
+      - backend
+    ports:
+      - "4001:4001"
 
   frontend:
     build: ./frontend
